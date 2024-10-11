@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input::placeholder {
+  color: #6B6B6B;
+}
+
+.wrapper {
+  padding-left: 5%;
+  padding-right: 5%;
+}
