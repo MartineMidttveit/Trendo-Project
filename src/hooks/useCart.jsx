@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
-
 const CartContext = createContext();
 
 const findCartItem = (cart, itemId) => cart.find(item => item.id === itemId);

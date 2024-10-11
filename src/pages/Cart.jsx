@@ -41,8 +41,11 @@ const Cart = () => {
                         alt={product.image.alt}
                       />
                       <div className="hidden md:flex flex-col space-y-1.5">
-                        {product.tags.map((tag) => (
-                          <div className="text-base text-secondary text-left leading-none capitalize">
+                        {product.tags.map((tag, index) => (
+                          <div
+                            key={index}
+                            className="text-base text-secondary text-left leading-none capitalize"
+                          >
                             {tag}
                           </div>
                         ))}
@@ -55,8 +58,11 @@ const Cart = () => {
 
                     <div className="md:hidden flex flex-col justify-start items-start gap-3">
                       <div className="flex flex-col gap-1">
-                        {product.tags.map((tag) => (
-                          <div className="text-base text-secondary text-left leading-none capitalize">
+                        {product.tags.map((tag, index) => (
+                          <div
+                            key={index}
+                            className="text-base text-secondary text-left leading-none capitalize"
+                          >
                             {tag}
                           </div>
                         ))}
@@ -67,9 +73,7 @@ const Cart = () => {
                       </div>
 
                       <div className="flex gap-1.5">
-                        <span>
-                          {formattedPrice(product?.price)}
-                        </span>
+                        <span>{formattedPrice(product?.price)}</span>
                         <span className="text-gray-400 line-through">
                           {formattedPrice(product?.discountedPrice)}
                         </span>
@@ -185,7 +189,7 @@ const Cart = () => {
               </button>
             </Link>
             <Link className="lg:w-2/4 w-full" to="/checkout">
-              <button className="rounded bg-customOrange uppercase p-4 w-full font-mediu">
+              <button className="rounded bg-customOrange uppercase p-4 w-full font-medium">
                 Checkout
               </button>
             </Link>

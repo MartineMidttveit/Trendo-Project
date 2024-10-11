@@ -1,8 +1,6 @@
 import { createContext } from "react"
 import useFetch from "../hooks/useFetch";
 
-
-
 export const productContext = createContext()
 
 export function ProductProvider({ children }) {
@@ -13,12 +11,8 @@ export function ProductProvider({ children }) {
             {children}
         </productContext.Provider>
     )
-
-
 }
 
 export default function Providers({ children }) {
-
-
     return (<ProductProvider>{children}</ProductProvider>)
 }

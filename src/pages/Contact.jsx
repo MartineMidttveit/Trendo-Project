@@ -1,68 +1,135 @@
-import React from 'react';
-import Cards from '../components/Cards';
-import { useContext } from 'react';
-import { productContext } from '../components/Providers';
+import { useState } from "react";
 
-function Frontpage() {
+export default function Contact() {
+    const [formData, setFormData] = useState({
+        name: "",
+        phone: "",
+        email: "",
+        message: ""
+    });
+    const [errors, setErrors] = useState({});
 
-  const { products } = useContext(productContext)
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData({ ...formData, [id]: value });
+        setErrors({ ...errors, [id]: "" });
+    };
 
-  return (
-    <main className="text-primary font-barlow relative">
-      <div className="bg-customGrey shadow-lg">
+    const validateForm = () => {
+        let validationErrors = {};
 
-        <div className="flex justify-center items-center relative">
-          <img src="/image.png" alt="Woman with sunglasses in front of a wall of leaves and flowers" className="w-full object-cover h-screen" />
+        if (!formData.name) {
+            validationErrors.name = "Name is required.";
+        }
 
-          <div className='absolute left-0 text-customGrey text-left wrapper bg-black bg-opacity-60 h-screen w-full flex flex-col justify-center xl:bg-transparent xl:block xl:h-auto'>
-            <p className='text-lg lg:text-xl 2xl:text-2xl font-medium mb-2 2xl:mb-5 pt-28'>SAVE UP TO 20% EXTRA ON THE</p>
-            <h1 className='text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold xl:font-medium'>Summer sale</h1>
-            <p className='lg:text-2xl 2xl:text-3xl mt-3 2xl:mt-8'>Don't miss out — shop now for the best deals!</p>
+        if (!formData.email) {
+            validationErrors.email = "Email is required.";
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            validationErrors.email = "Email is invalid.";
+        }
 
-            <button
-              className='
-                    bg-customOrange 
-                    mt-4 
-                    w-fit
-                    py-2.5
-                    px-6
-                    text-sm
-                    2xl:px-8 
-                    2xl:py-3 
-                    lg:mt-6
-                    xl:mt-8
-                    2xl:mt-10 
-                    text-primary 
-                    font-medium 
-                    lg:text-base
-                    2xl:text-lg 
-                    hover:bg-customGrey 
-                    hover:text-customGreen 
-                    duration-300'>SHOP NOW</button>
-          </div>
-        </div>
+        if (!formData.message) {
+            validationErrors.message = "Message is required.";
+        }
 
-        <div className='flex lg:items-end flex-col lg:flex-row wrapper'>
-          <div className='pt-10 text-left w-full mx-auto'>
-            <h1 className='text-2xl font-bold'>All products</h1>
-            <p className='2xl:text-lg pt-2'>Showing <span className='font-medium'>11</span> out of <span className='font-medium'>{products?.length}</span> products</p>
-          </div>
+        return validationErrors;
+    };
 
-          <div className="relative sm:w-64 mt-4">
-            <select name="sortBy" id="sortBy" className="text-sm xl:text-base border rounded px-3 py-2 outline-none h-10 w-full sm:w-64 xl:h-12" aria-label="Sort listings">
-              <option value="Latest">Most popular</option>
-              <option value="Ending">Newest products</option>
-              <option value="TitleAZ">Lowest price</option>
-              <option value="TitleZA">Highest price</option>
-              <option value="TitleZA">A to Z</option>
-            </select>
-          </div>
-        </div>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const validationErrors = validateForm();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+        } else {
+            console.log("Form submitted:", formData);
+            setFormData({
+                name: "",
+                phone: "",
+                email: "",
+                message: ""
+            });
+            setErrors({});
+        }
+    };
 
-        <Cards products={products} />
-      </div>
-    </main>
-  );
+    return (
+        <main className="text-primary font-barlow relative">
+            <div className="bg-customGrey shadow-lg">
+                <div className="2xl:w-1/3 mx-auto px-10 pt-12 pb-20">
+                    <div className="bg-white rounded shadow-md p-8">
+                        <h1 className="font-bold text-left text-xl mb-5">Contact</h1>
+                        <form className="flex items-center flex-col text-left" onSubmit={handleSubmit}>
+                            <div className="flex justify-center w-full gap-5 flex-col lg:flex-row">
+                                <div className="flex flex-col w-full">
+                                    <label className="font-semibold w-fit" htmlFor="name">
+                                        Name:
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        className={`ring-1 py-2 pl-3 mt-2 rounded focus:outline-none focus:ring-black focus:border-0 ${errors.name ? 'ring-red-500' : 'ring-secondary'}`}
+                                        placeholder="John Doe"
+                                    />
+                                    {errors.name && <span className="text-red-500 text-sm">{errors.name}</span>}
+                                </div>
+
+                                <div className="flex flex-col w-full">
+                                    <label className="flex items-center justify-between font-semibold" htmlFor="phone">
+                                        Phone Number:
+                                        <span className="text-secondary text-base">(optional)</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        className="ring-1 ring-secondary py-2 pl-3 mt-2 rounded focus:outline-none focus:ring-black focus:border-0"
+                                        placeholder="+ 47 96 15 92 43"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col w-full mt-5">
+                                <label className="flex items-center justify-between font-semibold w-fit" htmlFor="email">
+                                    Email:
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    className={`ring-1 py-2 pl-3 mt-2 rounded focus:outline-none focus:ring-black focus:border-0 ${errors.email ? 'ring-red-500' : 'ring-secondary'}`}
+                                    placeholder="john@example.com"
+                                />
+                                {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+                            </div>
+
+                            <div className="flex flex-col w-full mx-auto mt-5">
+                                <label htmlFor="message">
+                                    Your message:
+                                </label>
+                                <textarea
+                                    id="message"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    placeholder="Write your message here"
+                                    className={`h-[14rem] ring-1 rounded resize-none mt-2 focus:outline-none focus:border-none focus:ring-black p-2.5 ${errors.message ? 'ring-red-500' : 'ring-secondary'}`}
+                                />
+                                {errors.message && <span className="text-red-500 text-sm">{errors.message}</span>}
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="bg-secondary text-white px-5 py-2 rounded mt-5 w-full"
+                            >
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    );
 }
-
-export default Frontpage;

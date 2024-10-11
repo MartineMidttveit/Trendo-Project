@@ -9,19 +9,17 @@ import Frontpage from './pages/Frontpage';
 
 function App() {
   return (
-    <div className="App">
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Frontpage />} />
-            <Route path='product/:productId' element={<Product />} />
-            <Route path='cart' element={<Cart />} />
-            <Route path='checkout' element={<Checkout />} />
-            <Route path="contact" element={<Contact />} />
+            <Route path="/product/:productId" element={<Product />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/contact" element={<Contact />} />
           </Route>
         </Routes>
       </Router>
-    </div>
   );
 }
 

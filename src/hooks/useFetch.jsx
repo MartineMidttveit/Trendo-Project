@@ -17,7 +17,6 @@ export default function useFetch(id = "") {
             setValue(data.data)
         }
 
-
         fetchData()
     }, [])
 
