@@ -19,7 +19,7 @@ function Frontpage() {
             <h1 className='text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold xl:font-medium'>Summer sale</h1>
             <p className='lg:text-2xl 2xl:text-3xl mt-3 2xl:mt-8'>Don't miss out — shop now for the best deals!</p>
 
-            <button
+            <button type='button'
               className='
                     bg-customOrange 
                     mt-4 

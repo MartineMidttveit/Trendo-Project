@@ -184,12 +184,12 @@ const Cart = () => {
 
           <div className="flex lg:gap-2.5 gap-5 pb-10">
             <Link className="lg:w-2/4 w-full" to="/">
-              <button className="rounded ring-1 ring-black uppercase p-4 w-full font-medium">
+              <button type='button' className="rounded ring-1 ring-black uppercase p-4 w-full font-medium">
                 Shop More
               </button>
             </Link>
             <Link className="lg:w-2/4 w-full" to="/checkout">
-              <button className="rounded bg-customOrange uppercase p-4 w-full font-medium">
+              <button type='button' className="rounded bg-customOrange uppercase p-4 w-full font-medium">
                 Checkout
               </button>
             </Link>

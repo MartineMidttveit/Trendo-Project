@@ -1,26 +1,26 @@
-import React, { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { productContext } from "../components/Providers";
-import { useCart } from "../hooks/useCart";
-import ChevronRight from "../components/SVG/ChevronRight";
-import StarIcon from "../components/SVG/StarIcon";
-import useCurrencyFormatter from "../hooks/useCurrencyFormatter";
-import HeartIcon from "../components/SVG/HeartIcon";
+import React, { useContext, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { productContext } from '../components/Providers'
+import { useCart } from '../hooks/useCart'
+import ChevronRight from '../components/SVG/ChevronRight'
+import StarIcon from '../components/SVG/StarIcon'
+import useCurrencyFormatter from '../hooks/useCurrencyFormatter'
+import HeartIcon from '../components/SVG/HeartIcon'
 
 const Product = () => {
-  const { productId } = useParams();
-  const { products } = useContext(productContext);
-  const { addItemToCart } = useCart();
+  const { productId } = useParams()
+  const { products } = useContext(productContext)
+  const { addItemToCart } = useCart()
 
-  const formattedPrice = useCurrencyFormatter();
-  const product = products?.find((product) => product.id === productId);
-  const hasMoreThanOneReview = product?.reviews.length > 1;
+  const formattedPrice = useCurrencyFormatter()
+  const product = products?.find(product => product.id === productId)
+  const hasMoreThanOneReview = product?.reviews.length > 1
 
-  console.log(product);
+  console.log(product)
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="flex wrapper bg-customGrey flex-col lg:flex-row w-full">
@@ -87,8 +87,8 @@ const Product = () => {
                 </span>
 
                 <span className="text-secondary text-sm md:text-base 2xl:text-lg">
-                  (based on {product?.reviews.length}{" "}
-                  {hasMoreThanOneReview ? "reviews" : "review"})
+                  (based on {product?.reviews.length}{' '}
+                  {hasMoreThanOneReview ? 'reviews' : 'review'})
                 </span>
               </>
             )}
@@ -137,8 +137,11 @@ const Product = () => {
           {product?.reviews.length > 0 ? (
             <>
               <strong>Reviews</strong>
-              {product?.reviews.map((review) => (
-                <div key={review.id} className="mt-3 bg-white rounded shadow-xl p-5">
+              {product?.reviews.map(review => (
+                <div
+                  key={review.id}
+                  className="mt-3 bg-white rounded shadow-xl p-5"
+                >
                   <strong>{review.username}</strong>
                   <p>{review.description}</p>
                   <div className="flex items-center">
@@ -168,7 +171,7 @@ const Product = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product
